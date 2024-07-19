@@ -80,7 +80,7 @@ async function uploadToSharePoint(filename, fileBuffer) {
         }
       });
 
-    console.log('Upload session details', uploadSession);
+    // console.log('Upload session details', uploadSession);
     const maxSliceSize = 320 * 1024; // 320 KB chunk size
     let start = 0;
 
@@ -99,10 +99,10 @@ async function uploadToSharePoint(filename, fileBuffer) {
       start = end;
     }
 
-    console.log(`Upload of ${filename} completed. Bytes uploaded: ${fileBuffer.length}`);
+    console.log(`Upload of ${filename} completed.`);
 
     const fileMetadata = await client.api(`/sites/${siteId}/drives/${driveId}/root:/${filename}`).get();
-    console.log('File metadata:', fileMetadata);
+    // console.log('File metadata:', fileMetadata);
     return fileMetadata;
 
   } catch (error) {
@@ -118,7 +118,7 @@ app.post('/api/upload', async (req, res) => {
   
   console.log('API called from Referer:', referer);
   console.log('API called from Origin:', origin);
-  
+
   const { objectid, files } = req.body;
   const successfulUploads = [];
   const failedUploads = [];
