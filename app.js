@@ -112,6 +112,13 @@ async function uploadToSharePoint(filename, fileBuffer) {
 }
 
 app.post('/api/upload', async (req, res) => {
+
+  const referer = req.headers['referer'];
+  const origin = req.headers['origin'];
+  
+  console.log('API called from Referer:', referer);
+  console.log('API called from Origin:', origin);
+  
   const { objectid, files } = req.body;
   const successfulUploads = [];
   const failedUploads = [];
